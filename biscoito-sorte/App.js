@@ -2,18 +2,49 @@ import React, { Component } from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      textoFrase: "",
+      img: require("./src/biscoito.png"),
+    };
+    this.frases = [
+      "A vida trará coisas boas se tiver paciência.",
+      "Dificuldades preparam pessoas comuns para destinos extraordinários.",
+      "A vida é feita de escolhas, faça a sua.",
+      "Demonstre amor e alegria em todas as oportunidades e verás que a paz nasce dentro de você.",
+      "Não compense na ira o que lhe falta na razão.",
+      "A maior de todas as torres começa no solo.",
+      "Não espere por uma crise para descobrir o que é importante em sua vida.",
+      "A vida é uma aventura ousada ou não é nada.",
+    ];
+
+    this.quebraBiscoito = this.quebraBiscoito.bind(this);
+
+  }
+
+  quebraBiscoito() {
+    let numeroAleatorio = Math.floor(Math.random() * this.frases.length);
+
+    this.setState({
+      textoFrase: '"' + this.frases[numeroAleatorio] + '"',
+      img: require("./src/biscoitoAberto.png"),
+    });
+  }
+
   render() {
     return (
       <View style={styles.container}>
 
         <Image
-          source={require("./src/biscoito.png")}
+          source={this.state.img}
           style={styles.img}
         />
 
-        <Text style={styles.textoFrase}>" Alguma frase aqui" </Text>
+        <Text style={styles.textoFrase}>{this.state.textoFrase}</Text>
       
-        <TouchableOpacity style={styles.botao}>
+        <TouchableOpacity style={styles.botao} onPress={this.quebraBiscoito}>
           <View style={styles.btnArea}>
             <Text style={styles.btnTexto}> Abrir Biscoito </Text>
           </View>
