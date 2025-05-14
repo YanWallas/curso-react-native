@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 
 class App extends Component {
