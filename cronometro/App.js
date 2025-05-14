@@ -6,20 +6,33 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      timer: 0,
-      running: false,
+      num: 0,
+      botao: 'Start'
     };
+
+    this.timer = null;
 
     this.start = this.start.bind(this);
     this.stop = this.stop.bind(this);
   }
 
   start(){
+    if(this.timer !== null){
+      clearInterval(this.timer);
+      this.timer = null;
+      this.setState({botao: 'Start'});
+    }else{
+      // Inicia o timer
+      this.timer = setInterval(() => {
+      this.setState({num: this.state.num + 0.1});
+      }, 100);
 
+      this.setState({botao: 'Stop'});
+    }
   }
 
   stop(){
-    
+
   }
 
 
@@ -31,11 +44,11 @@ class App extends Component {
           style={styles.img}
         />
 
-        <Text style={styles.timer}> {this.state.timer.toFixed(1)} </Text>
+        <Text style={styles.timer}> {this.state.num.toFixed(1)} </Text>
 
         <View style={styles.btnArea}>
           <TouchableOpacity style={styles.btn} onPress={this.start}>
-            <Text style={styles.btnText}>Start</Text>
+            <Text style={styles.btnText}> {this.state.botao} </Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.btn} onPress={this.stop}>
