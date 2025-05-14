@@ -7,32 +7,42 @@ class App extends Component {
     super(props);
     this.state = {
       num: 0,
-      botao: 'Start'
+      button: 'Start',
+      last: null
     };
 
     this.timer = null;
 
     this.start = this.start.bind(this);
-    this.stop = this.stop.bind(this);
+    this.clean = this.clean.bind(this);
   }
 
   start(){
     if(this.timer !== null){
       clearInterval(this.timer);
       this.timer = null;
-      this.setState({botao: 'Start'});
+      this.setState({button: 'Start'});
     }else{
       // Inicia o timer
       this.timer = setInterval(() => {
       this.setState({num: this.state.num + 0.1});
       }, 100);
 
-      this.setState({botao: 'Stop'});
+      this.setState({button: 'Stop'});
     }
   }
 
-  stop(){
+  clean(){
+    if(this.timer !== null){
+      clearInterval(this.timer);
+      this.timer = null;
+    }
 
+    this.setState({
+      last: this.state.num, 
+      num: 0, 
+      button: 'Start'
+    });
   }
 
 
@@ -48,12 +58,18 @@ class App extends Component {
 
         <View style={styles.btnArea}>
           <TouchableOpacity style={styles.btn} onPress={this.start}>
-            <Text style={styles.btnText}> {this.state.botao} </Text>
+            <Text style={styles.btnText}> {this.state.button} </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.btn} onPress={this.stop}>
-            <Text style={styles.btnText}>Stop</Text>
+          <TouchableOpacity style={styles.btn} onPress={this.clean}>
+            <Text style={styles.btnText}>Clean</Text>
           </TouchableOpacity>
+        </View>
+
+        <View style={styles.lastSpace}>
+          <Text style={styles.textLast}>
+            {this.state.last > 0 ? `Last time: ${this.state.last.toFixed(1)}s` : ''}
+          </Text>
         </View>
       </View>
     );
@@ -92,6 +108,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#00aeef',
   },
+  lastSpace:{
+    marginTop: 40,
+  },
+  textLast:{
+    fontSize: 25,
+    fontStyle: 'italic',
+    color: '#FFF',
+  }
 });
 
 export default App;
