@@ -1,20 +1,55 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Component } from "react";
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+class App extends Component {
+  render() {
+    return (
+      <View style={styles.container}> 
+
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={styles.box1}></View>
+          <View style={styles.box2}></View>
+          <View style={styles.box3}></View>
+          <View style={styles.box4}></View>
+        </ScrollView>
+
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          <View style={styles.box1}></View>
+          <View style={styles.box2}></View>
+          <View style={styles.box3}></View>
+          <View style={styles.box4}></View>
+        </ScrollView>
+      
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    
   },
+  box1:{
+    backgroundColor: 'red',
+    height: 250,
+    width: 150
+  },
+  box2:{
+    backgroundColor: 'green',
+    height: 250,
+    width: 150
+  },
+  box3:{
+    backgroundColor: 'yellow',
+    height: 250,
+    width: 150
+  },
+  box4:{
+    backgroundColor: 'blue',
+    height: 250,
+    width: 150
+  }
 });
+
+export default App;
