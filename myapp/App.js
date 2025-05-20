@@ -11,8 +11,6 @@ class App extends Component {
         { id: '1', name: 'Wallas', idade: 26, email: 'wallas@example.com' },
         { id: '2', name: 'Matheus', idade: 30, email: 'matheus@example.com' },
         { id: '3', name: 'João', idade: 22, email: 'joao@example.com' },
-        { id: '4', name: 'Henrique', idade: 15, email: 'henrique@example.com' },
-        { id: '5', name: 'Lima', idade: 46, email: 'lima@example.com' },
       ]
     };
   }

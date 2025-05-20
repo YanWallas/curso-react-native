@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { Text, View, StyleSheet } from 'react-native';
 import { Picker } from '@react-native-picker/picker'
+import Slider from '@react-native-community/slider';
 
 class Pessoas extends Component {
   
@@ -12,7 +13,8 @@ class Pessoas extends Component {
         {key: 1, nome: "OK"},
         {key: 2, nome: "Em Andamento"},
         {key: 3, nome: "Finalizado"}
-      ]
+      ],
+      sliderValue: 20
     };
 
   }
@@ -37,6 +39,16 @@ class Pessoas extends Component {
         >
          {statusItem}
         </Picker>
+
+        <Text style={{color: '#FFF', fontSize: 18, padding: 6, marginTop: 8}}> Porcentagem de Conclusão: {this.state.sliderValue.toFixed(0)}%</Text>
+        <Slider 
+          minimumValue={0}
+          maximumValue={100}
+          onValueChange={(valorSelecionado) => this.setState({sliderValue: valorSelecionado})}
+          value={this.state.sliderValue}
+          minimumTrackTintColor="#00FF00"
+          maximumTrackTintColor="#FF0000"
+        /> 
       </View>
     );
   }
