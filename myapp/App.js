@@ -9,8 +9,6 @@ class App extends Component {
     this.state = {
       data: [
         { id: '1', name: 'Wallas', idade: 26, email: 'wallas@example.com' },
-        { id: '2', name: 'Matheus', idade: 30, email: 'matheus@example.com' },
-        { id: '3', name: 'João', idade: 22, email: 'joao@example.com' },
       ]
     };
   }

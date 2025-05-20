@@ -9,10 +9,10 @@ class Pessoas extends Component {
     super(props);
     this.state = {
       status: 0,
-      statusAll: [
-        {key: 1, nome: "OK"},
-        {key: 2, nome: "Em Andamento"},
-        {key: 3, nome: "Finalizado"}
+      statusSexo: [
+        {key: 1, nome: "Masculino"},
+        {key: 2, nome: "Feminino"},
+        {key: 3, nome: "Não Especificar"}
       ],
       sliderValue: 20,
       switchValue: false
@@ -22,7 +22,7 @@ class Pessoas extends Component {
 
   render() {
 
-    let statusItem = this.state.statusAll.map((v,k) => {
+    let statusItem = this.state.statusSexo.map((v,k) => {
       return <Picker.Item key={k} value={k} label={v.nome}/>
     })
 
@@ -31,7 +31,7 @@ class Pessoas extends Component {
         <Text style={styles.textPessoa}>Nome: {this.props.data.name}</Text>
         <Text style={styles.textPessoa}>Idade: {this.props.data.idade}</Text>
         <Text style={styles.textPessoa}>Email: {this.props.data.email}</Text>
-        <Text style={{color: '#FFF', fontSize: 18, padding: 6, marginTop: 8}}>Status: {this.state.statusAll[this.state.status].nome}</Text>
+        <Text style={{color: '#FFF', fontSize: 18, padding: 6, marginTop: 8}}>Status: {this.state.statusSexo[this.state.status].nome}</Text>
 
         <Picker 
           selectedValue={this.state.status}
@@ -41,11 +41,11 @@ class Pessoas extends Component {
          {statusItem}
         </Picker>
 
-        <Text style={{color: '#FFF', fontSize: 18, padding: 6, marginTop: 8}}> Porcentagem de Conclusão: {this.state.sliderValue.toFixed(0)}%</Text>
+        <Text style={{color: '#FFF', fontSize: 18, padding: 6, marginTop: 8}}> Limite Desejado: {this.state.sliderValue.toFixed(0)}</Text>
         <Slider
           style={{width: '100%', height: 40, backgroundColor: '#FFF580'}} 
           minimumValue={0}
-          maximumValue={100}
+          maximumValue={2000}
           onValueChange={(valorSelecionado) => this.setState({sliderValue: valorSelecionado})}
           value={this.state.sliderValue}
           minimumTrackTintColor="#00FF00"
@@ -59,7 +59,7 @@ class Pessoas extends Component {
         />
 
         <Text style={{color: '#FFF', fontSize: 18, padding: 6, marginTop: 8}}>
-          Botão esta: {this.state.switchValue ? "Ativo" : "Inativo"}
+          Você é estudante? {this.state.switchValue ? "Sim" : "Não"}
         </Text>
       </View>
     );
