@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, Switch } from 'react-native';
 import { Picker } from '@react-native-picker/picker'
 import Slider from '@react-native-community/slider';
 
@@ -14,7 +14,8 @@ class Pessoas extends Component {
         {key: 2, nome: "Em Andamento"},
         {key: 3, nome: "Finalizado"}
       ],
-      sliderValue: 20
+      sliderValue: 20,
+      switchValue: false
     };
 
   }
@@ -41,7 +42,8 @@ class Pessoas extends Component {
         </Picker>
 
         <Text style={{color: '#FFF', fontSize: 18, padding: 6, marginTop: 8}}> Porcentagem de Conclusão: {this.state.sliderValue.toFixed(0)}%</Text>
-        <Slider 
+        <Slider
+          style={{width: '100%', height: 40, backgroundColor: '#FFF580'}} 
           minimumValue={0}
           maximumValue={100}
           onValueChange={(valorSelecionado) => this.setState({sliderValue: valorSelecionado})}
@@ -49,6 +51,16 @@ class Pessoas extends Component {
           minimumTrackTintColor="#00FF00"
           maximumTrackTintColor="#FF0000"
         /> 
+
+        <Switch 
+          value={this.state.switchValue}
+          onValueChange={(valorSwitch) => this.setState({switchValue: valorSwitch})}
+          thumbColor={this.state.switchValue ? "#00FF00" : "#FF0000"}
+        />
+
+        <Text style={{color: '#FFF', fontSize: 18, padding: 6, marginTop: 8}}>
+          Botão esta: {this.state.switchValue ? "Ativo" : "Inativo"}
+        </Text>
       </View>
     );
   }
