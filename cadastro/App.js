@@ -47,7 +47,7 @@ class App extends Component {
   }
 
   alert(
-    `Nome: ${nome}\nIdade: ${idade}\nSexo: ${sexoSelecionado}\nLimite: ${sliderValue.toFixed(0)}\nEstudante: ${switchValue ? 'Sim' : 'Não'}`
+    `Cadastro realizado com sucesso!\nNome: ${nome}\nIdade: ${idade}\nSexo: ${sexoSelecionado}\nLimite: ${sliderValue.toFixed(0)}\nEstudante: ${switchValue ? 'Sim' : 'Não'}`
   );
 }
 
@@ -63,7 +63,7 @@ class App extends Component {
 
         <Text style={styles.title}>Faça seu cadastro!!!</Text>
 
-        <Text style={styles.label}>Digite seu Nome: </Text>
+        <Text style={styles.label}>Nome Completo: </Text>
         <TextInput
           style={styles.input}
           placeholder="Digite seu nome"
