@@ -1,6 +1,6 @@
 import { Component } from 'react';
-import { StyleSheet, Text, View, Switch } from 'react-native';
-import { Slider } from '@react-native-community/slider';
+import { StyleSheet, Text, View, Switch, TextInput } from 'react-native';
+import Slider from '@react-native-community/slider';
 import { Picker } from '@react-native-picker/picker';
 
 class App extends Component {
@@ -27,7 +27,10 @@ class App extends Component {
 
     return (
       <View style={styles.container}>
-      
+
+
+        <View style={styles.hr} />
+
         <Text style={styles.label}>Defina sua Sexo: </Text>
         <Picker
           selectedValue={this.state.status}
@@ -36,6 +39,33 @@ class App extends Component {
         >
           {statusItem}
         </Picker>
+
+        <View style={styles.hr} />
+
+        <Text style={styles.label}>Limite Desejado: {this.state.sliderValue.toFixed(0)}</Text>
+        <Slider
+          style={styles.slider}
+          minimumValue={0}
+          maximumValue={2500}
+          value={this.state.sliderValue}
+          onValueChange={valueSelecionado => this.setState({ sliderValue: valueSelecionado })}
+          minimumTrackTintColor="#00ff00"
+          maximumTrackTintColor="#FF0000"
+        />
+
+        <View style={styles.hr} />
+
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Text style={styles.label}>
+            Você é estudante? {this.state.switchValue ? "Sim" : "Não"}
+          </Text>
+
+          <Switch 
+            value={this.state.switchValue}
+            onValueChange={(valorSwitch) => this.setState({switchValue: valorSwitch})}
+            thumbColor={this.state.switchValue ? "#00FF00" : "#FF0000"}
+          />
+        </View>
       </View>
     );
   }
@@ -49,16 +79,36 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
   },
+  input: {
+    height: 50,
+    width: '100%',
+    backgroundColor: '#D3D3D3',
+    borderRadius: 10,
+    padding: 10,
+    marginVertical: 10,
+  },
   label: {
     fontSize: 18,
-    marginBottom: 10,
+    padding: 6,
+    margin: 10,
   },
   picker: {
     height: 50, 
-    width: 200,
-    borderColor: '#000',
-    borderWidth: 2,
-    borderRadius: 8,
+    width: 160,
+    backgroundColor: '#D3D3D3',
+    borderRadius: 10,
+  },
+  hr:{
+    height: 2,
+    backgroundColor: '#ccc',
+    width: '100%',
+    marginVertical: 10,
+  },
+  slider: {
+    width: '100%',
+    height: 40,
+    backgroundColor: '#D3D3D3',
+    borderRadius: 10,
   },
 });
 
