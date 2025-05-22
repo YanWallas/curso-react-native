@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { StyleSheet, Text, View, Switch, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Switch, TextInput, TouchableOpacity } from 'react-native';
 import Slider from '@react-native-community/slider';
 import { Picker } from '@react-native-picker/picker';
 
@@ -14,10 +14,43 @@ class App extends Component {
         { key: 2, nome: 'Feminino' },
         { key: 3, nome: 'Outro' }
       ],
-      sliderValue: 20,
+      sliderValue: 100,
       switchValue: false,
+      nome: '',
+      idade: '',
     };
   }
+
+  cadastrar = () => {
+  const { nome, idade, status, statusSexo, sliderValue, switchValue } = this.state;
+
+  // Verificações de campos obrigatórios
+  if (!nome || nome.trim() === '') {
+    alert('Por favor, preencha o nome.');
+    return;
+  }
+
+  if (!idade || idade.trim() === '') {
+    alert('Por favor, preencha a idade.');
+    return;
+  }
+
+  if (isNaN(idade)) {
+    alert('A idade deve ser um número.');
+    return;
+  }
+
+  const sexoSelecionado = statusSexo[status]?.nome;
+  if (!sexoSelecionado) {
+    alert('Por favor, selecione um sexo.');
+    return;
+  }
+
+  alert(
+    `Nome: ${nome}\nIdade: ${idade}\nSexo: ${sexoSelecionado}\nLimite: ${sliderValue.toFixed(0)}\nEstudante: ${switchValue ? 'Sim' : 'Não'}`
+  );
+}
+
 
   render() {
 
@@ -28,6 +61,22 @@ class App extends Component {
     return (
       <View style={styles.container}>
 
+        <Text style={styles.title}>Faça seu cadastro!!!</Text>
+
+        <Text style={styles.label}>Digite seu Nome: </Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Digite seu nome"
+          onChangeText={text => this.setState({ nome: text })}
+        />
+
+        <Text style={styles.label}>Digite sua Idade: </Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Digite sua idade"
+          keyboardType="numeric"
+          onChangeText={text => this.setState({ idade: text })}
+        />
 
         <View style={styles.hr} />
 
@@ -45,7 +94,7 @@ class App extends Component {
         <Text style={styles.label}>Limite Desejado: {this.state.sliderValue.toFixed(0)}</Text>
         <Slider
           style={styles.slider}
-          minimumValue={0}
+          minimumValue={100}
           maximumValue={2500}
           value={this.state.sliderValue}
           onValueChange={valueSelecionado => this.setState({ sliderValue: valueSelecionado })}
@@ -66,6 +115,12 @@ class App extends Component {
             thumbColor={this.state.switchValue ? "#00FF00" : "#FF0000"}
           />
         </View>
+
+        <TouchableOpacity style={styles.areaButton} onPress={() => this.cadastrar()}>
+          <Text style={styles.button}>
+            Cadastrar
+          </Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -78,6 +133,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 10,
+    backgroundColor: '#e8f5e9',
+  },
+  title:{
+    fontSize: 30,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    color: '#000',
   },
   input: {
     height: 50,
@@ -90,13 +152,12 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 18,
     padding: 6,
-    margin: 10,
+    marginBottom: 4,
   },
   picker: {
-    height: 50, 
-    width: 160,
+    height: 50,
+    width: '80%',
     backgroundColor: '#D3D3D3',
-    borderRadius: 10,
   },
   hr:{
     height: 2,
@@ -110,6 +171,23 @@ const styles = StyleSheet.create({
     backgroundColor: '#D3D3D3',
     borderRadius: 10,
   },
+  areaButton:{
+    width: '100%',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  button:{
+    backgroundColor: '#007BFF',
+    color: '#FFF',
+    fontSize: 20,
+    fontWeight: 'bold',
+    width: '100%',
+    textAlign: 'center',
+    borderRadius: 10,
+    padding: 12,
+    alignItems: 'center',
+    marginTop: 10,
+  }
 });
 
 export default App;
