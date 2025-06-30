@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, Modal } from 'react-native';
+import Entrar from './src/Entrar';
 
 export default class App extends Component{
 
@@ -28,10 +29,8 @@ export default class App extends Component{
         <Button title='Entrar' onPress={ this.entrar }/>
 
         <Modal animationType='slide' visible={this.state.modalVisible}>
-          <View style={{backgroundColor: '#292929', flex:1}}>
-            <Text style={{color: '#FFF', fontSize: 28,}}>Seja Bem-vindo</Text>
-
-            <Button title='Sair' onPress={() => this.sair(false) }/>
+          <View style={{margin: 8, flex:1, alignItems: 'center', justifyContent: 'center'}}>
+            <Entrar fechar={ () => this.sair(false)}/>
           </View>
         </Modal>
       </View>
