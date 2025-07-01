@@ -1,14 +1,30 @@
 import React, {Component} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Modal, Image, TextInput, TouchableOpacity } from 'react-native';
+import InfoModal from './src/Components/InfoModal';
 
 export default class App extends Component{
 
   constructor(props){
     super(props);
     this.state={
-      modalVisible:false
-    }
+      modalVisible: false,
+      alcool: '',
+      gasolina: '',
+      resultado: '',
+    };
+  }
+
+  calcular(){
+    const { alcool, gasolina } = this.state;
+    const alc = parseFloat(alcool);
+    const gas = parseFloat(gasolina);
+
+    if(!alc || !gas) return;
+
+    const resultado = (alc / gas) < 0.7 ? 'Álcool é a melhor opção!' : 'Gasolina é a melhor opção!';
+    this.setState({ resultado, modalVisible: true });
+
   }
 
   render(){
@@ -26,20 +42,43 @@ export default class App extends Component{
             <Text style={styles.inputText}>Álcool (preço por litro):</Text>
             <TextInput
               style={styles.input}
+              keyboardType='numeric'
+              value={this.state.alcool}
+              onChangeText={(valor) => this.setState({alcool: valor})}
             />
           </View>
 
           <View style={styles.inputArea}>
-            <Text style={styles.inputText}>Gasolilna (preço por litro):</Text>
+            <Text style={styles.inputText}>Gasolina (preço por litro):</Text>
             <TextInput
               style={styles.input}
+              keyboardType='numeric'
+              value={this.state.gasolina}
+              onChangeText={(valor) => this.setState({gasolina: valor})}
             />
           </View>
 
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={ this.calcular.bind(this) }>
             <Text style={styles.inputButton}>Calcular</Text>
           </TouchableOpacity>
         </View>
+
+        <Modal animationType='slide' visible={this.state.modalVisible} transparent={true}>
+          <View style={{margin: 8, flex:1, alignItems: 'center', justifyContent: 'center'}}>
+            <InfoModal 
+              resultado={this.state.resultado}
+              alcool={this.state.alcool}
+              gasolina={this.state.gasolina}
+
+              fechar={ () => this.setState({ 
+                modalVisible: false,
+                alcool: '',
+                gasolina: '',
+                resultado: ''
+               })}
+            />
+          </View>
+        </Modal>
         
       </View>
     )
