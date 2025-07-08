@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useRef } from "react";
 import AsyncStorage from "@react-native-community/async-storage";
 import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
 
@@ -6,6 +6,7 @@ import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-nativ
 export default function App(){
   const [nome, setNome] = useState('');
   const [input, setInput] = useState('');
+  const nomeInput = useRef(null);
 
   useEffect(()=> {
     async function getStorage(){
@@ -31,6 +32,10 @@ export default function App(){
     setInput('');
   }
 
+  function novoNome(){
+    nomeInput.current.focus();
+  }
+
   const letrasNome = useMemo(()=> {
     console.log('Mudou letra');
     return nome.length; 
@@ -43,6 +48,7 @@ export default function App(){
         placeholder="Seu nome..."
         value={input}
         onChangeText={(text) => setInput(text)}
+        ref={nomeInput}
       />
 
       <TouchableOpacity style={styles.btn} onPress={alteraNome}>
@@ -51,6 +57,10 @@ export default function App(){
 
       <Text style={styles.texto}> {nome} </Text>
       <Text style={styles.texto}>Tem {letrasNome} letras.</Text>
+
+      <TouchableOpacity onPress={novoNome}>
+        <Text>Novo nome</Text>
+      </TouchableOpacity>
 
     </View>
   )
