@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import AsyncStorage from "@react-native-community/async-storage";
 import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
 
@@ -31,6 +31,11 @@ export default function App(){
     setInput('');
   }
 
+  const letrasNome = useMemo(()=> {
+    console.log('Mudou letra');
+    return nome.length; 
+  }, [nome]);
+
   return(
     <View style={styles.container}>
 
@@ -45,6 +50,7 @@ export default function App(){
       </TouchableOpacity>
 
       <Text style={styles.texto}> {nome} </Text>
+      <Text style={styles.texto}>Tem {letrasNome} letras.</Text>
 
     </View>
   )
