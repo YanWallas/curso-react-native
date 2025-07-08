@@ -1,37 +1,50 @@
-import { Component } from "react";
-import { StyleSheet, Text, View, FlatList } from 'react-native';
-import Pessoas from "./src/Pessoas";
+import React, { useState } from "react";
+import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
 
-class App extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: [
-        { id: '1', name: 'Wallas', idade: 26, email: 'wallas@example.com' },
-      ]
-    };
+export default function App(){
+  const [nome, setNome] = useState('Lucas');
+  const [input, setInput] = useState('');
+
+  function alteraNome(){
+    setNome(input);
+    setInput('');
   }
 
-  render() {
-    return (
-      <View style={styles.container}> 
+  return(
+    <View style={styles.container}>
 
-        <FlatList
-          data={this.state.data}
-          keyExtractor={(item) => item.id}
-          renderItem={({item}) => <Pessoas data={item} />}
-        />
-      
-      </View>
-    );
-  }
+      <TextInput
+        placeholder="Seu nome..."
+        value={input}
+        onChangeText={(text) => setInput(text)}
+      />
+
+      <TouchableOpacity style={styles.btn} onPress={alteraNome}>
+        <Text style={styles.btnText}>Altera Nome</Text>
+      </TouchableOpacity>
+
+      <Text style={styles.texto}> {nome} </Text>
+
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: 15
+  },
+  texto:{
+    color: '#000',
+    fontSize: 35
+  },
+  btn:{
+    backgroundColor: '#222',
+    alignItems: 'center',
+    padding: 10
+  },
+  btnText:{
+    color: '#FFF'
   }
 });
-
-export default App;
