@@ -1,10 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import AsyncStorage from "@react-native-community/async-storage";
 import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
 
 
 export default function App(){
-  const [nome, setNome] = useState('Lucas');
+  const [nome, setNome] = useState('');
   const [input, setInput] = useState('');
+
+  useEffect(()=> {
+    async function getStorage(){
+      const nomeStorage = await AsyncStorage.getItem('nomes');
+      if(nomeStorage != null){
+        setNome(nomeStorage);
+      }
+    }
+
+    getStorage();
+  }, [])
+
+  useEffect(()=>{
+    async function saveStorage(){
+      await AsyncStorage.setItem('nomes', nome);
+    }
+
+    saveStorage();
+  },[nome])
 
   function alteraNome(){
     setNome(input);
