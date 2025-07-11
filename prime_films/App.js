@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { StatusBar } from 'react-native';
 import { StyleSheet, Text, View, FlatList, ActivityIndicator } from 'react-native';
 
 import api from './src/services/api';
@@ -11,7 +12,7 @@ export default function App() {
   useEffect(() => {
 
     async function loadFilmes(){
-      const response = await api.get(`movie/now_playing?api_key=10336075e69e824f4134ca90376b9ed8&language=pt-BR&region=BR`);
+      const response = await api.get(`movie/now_playing?api_key=10336075e69e824f4134ca90376b9ed8`);
       //console.log(response.data);
       setFilmes(response.data.results);
       setLoading(false);
@@ -37,6 +38,8 @@ export default function App() {
           renderItem={({item}) => <Filmes data={item}/> }
         />
 
+        <StatusBar backgroundColor="#1c1c1c" barStyle="light-content" />
+
       </View>
     );
   }
@@ -46,6 +49,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 25
+    backgroundColor: '#000'
   },
 });

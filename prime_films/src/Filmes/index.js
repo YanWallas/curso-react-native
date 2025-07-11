@@ -34,14 +34,16 @@ export default function Filmes({ data }){
 
 const styles = StyleSheet.create({
   card:{
-    backgroundColor: '#FFF',
+    backgroundColor: '#3b3b3b',
     margin: 15,
     elevation: 2
   },
   titulo:{
     padding: 15,
     fontSize: 18,
-    bold: 18
+    bold: 18,
+    color: '#ff0000',
+    fontWeight: 'bold',
   },
   capa:{
     height: 250,
@@ -54,7 +56,7 @@ const styles = StyleSheet.create({
   },
   botao:{
     width: 100,
-    backgroundColor: '#09a6ff',
+    backgroundColor: '#ff0000',
     opacity: 1,
     padding: 8,
     borderTopLeftRadius: 5,

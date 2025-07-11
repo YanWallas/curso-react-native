@@ -15,8 +15,10 @@ export default function Detalhes(props){
         <Text style={styles.sinopse}>Sinopse:</Text>
         <Text style={styles.descricao}>{props.filme.overview}</Text>
 
-      </View>
+        <Text style={styles.avaliacao}>Avaliação: {props.filme.vote_average} / 10</Text>
 
+      </View>
+      
     </View>
   )
 }
@@ -59,5 +61,12 @@ const styles = StyleSheet.create({
     color: '#FFF',
     marginLeft: 10,
     marginRight: 10
+  },
+  avaliacao:{
+    color: '#FFF',
+    marginTop: 25,
+    marginLeft: 10,
+    marginRight: 10,
+    fontWeight: 'bold'
   }
 });
