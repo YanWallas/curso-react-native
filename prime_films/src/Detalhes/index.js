@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 
 export default function Detalhes(props){
   return(
@@ -7,15 +7,25 @@ export default function Detalhes(props){
 
       <View style={styles.modalContainer}>
 
-        <TouchableOpacity style={styles.btnVoltar} onPress={ props.voltar }>
-          <Text style={{ color: '#FFF', fontSize: 16 }}>Voltar</Text>
-        </TouchableOpacity>
+        <View style={styles.conteudo}>
+          <Text style={styles.titulo}>{props.filme.title}</Text>
 
-        <Text style={styles.titulo}>{props.filme.title}</Text>
-        <Text style={styles.sinopse}>Sinopse:</Text>
-        <Text style={styles.descricao}>{props.filme.overview}</Text>
+          <Image
+            source={{ uri: `https://image.tmdb.org/t/p/original/${props.filme.backdrop_path}` }}
+            style={styles.capa}
+          />
 
-        <Text style={styles.avaliacao}>Avaliação: {props.filme.vote_average} / 10</Text>
+          <Text style={styles.sinopse}>Sinopse:</Text>
+          <Text style={styles.descricao}>{props.filme.overview}</Text>
+
+          <Text style={styles.avaliacao}>Avaliação: {props.filme.vote_average ? props.filme.vote_average.toFixed(1) : 'N/A'} / 10</Text>
+        </View>
+
+        <View style={styles.areaBotao}>
+          <TouchableOpacity style={styles.btnVoltar} onPress={props.voltar}>
+            <Text style={{ color: '#FFF', fontSize: 16 }}>Voltar</Text>
+          </TouchableOpacity>
+        </View>
 
       </View>
       
@@ -29,27 +39,42 @@ const styles = StyleSheet.create({
     marginRight: 10,
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'flex-end'
+    justifyContent: 'center'
   },
   modalContainer:{
     width: '95%',
-    height: '80%',
+    height: '99%',
     backgroundColor: '#121212',
     borderTopLeftRadius: 5,
-    borderTopRightRadius: 5
+    borderTopRightRadius: 5,
+    justifyContent: 'flex-start',
+  },
+  conteudo:{
+    flexGrow:1
+  },
+  areaBotao:{
+    justifyContent: 'flex-end',
+    marginTop: 20
   },
   btnVoltar:{
     backgroundColor: '#e52246',
     padding: 10,
-    borderTopLeftRadius: 5,
-    borderTopRightRadius: 5
+    borderBottomLeftRadius: 5,
+    borderBottomRightRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   titulo:{
     textAlign: 'center',
-    color: '#FFF',
+    color: '#FF0000',
     padding: 10,
-    fontSize: 28,
-    fontWeight: 'bold'
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginTop: 12
+  },
+   capa:{
+    height: 150,
+    margin: 10
   },
   sinopse:{
     color: '#FFF',
