@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   },
   modalContainer:{
     width: '95%',
-    height: '99%',
+    height: '95%',
     backgroundColor: '#121212',
     borderTopLeftRadius: 5,
     borderTopRightRadius: 5,
@@ -79,19 +79,24 @@ const styles = StyleSheet.create({
   sinopse:{
     color: '#FFF',
     fontSize: 18,
+    marginTop: 8,
     marginBottom: 8,
-    marginLeft: 10
+    marginLeft: 10,
+    fontWeight: 'bold'
   },
   descricao:{
     color: '#FFF',
     marginLeft: 10,
-    marginRight: 10
+    marginRight: 10,
+    lineHeight: 20,
+    textAlign: 'justify'
   },
   avaliacao:{
     color: '#FFF',
     marginTop: 25,
     marginLeft: 10,
     marginRight: 10,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    fontSize: 16 
   }
 });

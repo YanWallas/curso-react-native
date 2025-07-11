@@ -36,7 +36,8 @@ const styles = StyleSheet.create({
   card:{
     backgroundColor: '#3b3b3b',
     margin: 15,
-    elevation: 2
+    elevation: 2,
+    marginTop: 30
   },
   titulo:{
     padding: 15,
