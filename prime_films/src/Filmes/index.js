@@ -10,10 +10,10 @@ export default function Filmes({ data }){
     <View>
 
       <View style={styles.card}>
-        <Text style={styles.titulo}>{data.nome}</Text>
+        <Text style={styles.titulo}>{data.title}</Text>
 
         <Image
-          source={{ uri: data.foto }}
+          source={{ uri: `https://image.tmdb.org/t/p/original/${data.poster_path}` }}
           style={styles.capa}
         />
 

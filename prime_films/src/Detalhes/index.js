@@ -11,9 +11,9 @@ export default function Detalhes(props){
           <Text style={{ color: '#FFF', fontSize: 16 }}>Voltar</Text>
         </TouchableOpacity>
 
-        <Text style={styles.titulo}>{props.filme.nome}</Text>
+        <Text style={styles.titulo}>{props.filme.title}</Text>
         <Text style={styles.sinopse}>Sinopse:</Text>
-        <Text style={styles.descricao}>{props.filme.sinopse}</Text>
+        <Text style={styles.descricao}>{props.filme.overview}</Text>
 
       </View>
 

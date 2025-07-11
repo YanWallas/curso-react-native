@@ -11,9 +11,9 @@ export default function App() {
   useEffect(() => {
 
     async function loadFilmes(){
-      const response = await api.get('r-api/?api=filmes');
+      const response = await api.get(`movie/now_playing?api_key=10336075e69e824f4134ca90376b9ed8&language=pt-BR&region=BR`);
       //console.log(response.data);
-      setFilmes(response.data);
+      setFilmes(response.data.results);
       setLoading(false);
     }
 
