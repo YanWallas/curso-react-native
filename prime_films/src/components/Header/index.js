@@ -1,16 +1,24 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { useNavigation, useRoute } from "@react-navigation/native";
+
 
 export default function Header(){
+  const navigation = useNavigation();
+  const route = useRoute();
+
   return (
     <View style={StyleSheet.header}>
       <TouchableOpacity onPress={() => navigation.navigate('Home')}>
         <Text style={styles.logo}>Save Flix</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => navigation.navigate('Favoritos')}>
-        <Text style={styles.favoritos}>Meus Filmes</Text>
-      </TouchableOpacity>
+      {route.name !== 'Favoritos' && (
+        <TouchableOpacity onPress={() => navigation.navigate('Favoritos')}>
+          <Text style={styles.favoritos}>Meus Filmes</Text>
+        </TouchableOpacity>
+      )}
+      
     </View>
   );
 }
