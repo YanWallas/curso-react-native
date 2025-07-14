@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, FlatList, ActivityIndicator } from 'react-nativ
 
 import api from './src/services/api';
 import Filmes from './src/Filmes';
+import Header from './src/components/Header';
 
 export default function App() {
   const [filmes, setFilmes] = useState([]);
@@ -25,6 +26,8 @@ export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="#1c1c1c" barStyle="light-content" />
+
+      <Header/>
 
       {loading ? (
         <View style={{ alignItems:'center', justifyContent:'center', flex:1}}>
