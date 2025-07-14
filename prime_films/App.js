@@ -21,29 +21,24 @@ export default function App() {
     loadFilmes();
 
   }, [])
-  
-  if(loading){
-    return(
-      <View style={{ alignItems:'center', justifyContent:'center', flex:1}}>
-        <ActivityIndicator color='#121212' size={45}/>
-      </View>
-    )
-  }else{
-    return (
-      <View style={styles.container}>
-        
+
+  return (
+    <View style={styles.container}>
+      <StatusBar backgroundColor="#1c1c1c" barStyle="light-content" />
+
+      {loading ? (
+        <View style={{ alignItems:'center', justifyContent:'center', flex:1}}>
+          <ActivityIndicator color='#121212' size={45}/>
+        </View>
+      ) : (
         <FlatList
           data={filmes}
           keyExtractor={item => String(item.id) }
           renderItem={({item}) => <Filmes data={item}/> }
         />
-
-        <StatusBar backgroundColor="#1c1c1c" barStyle="light-content" />
-
-      </View>
-    );
-  }
- 
+      )}
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

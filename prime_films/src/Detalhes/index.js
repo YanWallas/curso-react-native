@@ -47,14 +47,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#121212',
     borderTopLeftRadius: 5,
     borderTopRightRadius: 5,
-    justifyContent: 'flex-start',
+    flex: 1,
+    justifyContent: 'space-between',
   },
   conteudo:{
-    flexGrow:1
+    paddingBottom: 20
   },
   areaBotao:{
-    justifyContent: 'flex-end',
-    marginTop: 20
+    alignItems: 'center'
   },
   btnVoltar:{
     backgroundColor: '#e52246',
@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',
+    alignSelf: 'stretch'
   },
   titulo:{
     textAlign: 'center',

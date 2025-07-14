@@ -42,7 +42,6 @@ const styles = StyleSheet.create({
   titulo:{
     padding: 15,
     fontSize: 18,
-    bold: 18,
     color: '#ff0000',
     fontWeight: 'bold',
   },
