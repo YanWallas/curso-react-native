@@ -83,7 +83,8 @@ const styles = StyleSheet.create({
     borderColor: '#FFF',
     borderRadius: 6,
     marginBottom: 20,
-    marginTop:20
+    marginTop: 20,
+    padding: 6
   },
   title:{
     color: '#FFF',
@@ -101,13 +102,14 @@ const styles = StyleSheet.create({
   nome:{
     fontSize: 18,
     color: '#fff',
-    padding: 4,
-    marginLeft: 4
+    padding: 6,
+    marginLeft: 6,
+    marginTop: 6
   },
   actions:{
     flexDirection: 'row',
-    gap: 20,
-    padding: 4,
+    gap: 15,
+    padding: 6,
     marginLeft: 4
   },
   link:{
@@ -117,6 +119,7 @@ const styles = StyleSheet.create({
     borderColor: "#0af",
     paddingVertical: 4,
     paddingHorizontal: 8,
+    marginBottom: 6
   },
   excluir:{
     color: '#f00',
