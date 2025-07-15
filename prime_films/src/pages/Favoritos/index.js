@@ -71,31 +71,58 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#000',
-    padding: 20
+    padding: 10
+  },
+  text:{
+    color: '#FFF',
+    fontSize: 20,
+    textAlign: 'center',
+    marginBottom: 10,
+    fontWeight: 'bold',
+    borderWidth: 1,
+    borderColor: '#FFF',
+    borderRadius: 6,
+    marginBottom: 20,
+    marginTop:20
   },
   title:{
     color: '#FFF',
     fontSize: 24,
-    marginBottom: 20
+    marginBottom: 20,
   },
   empty:{
     color: '#aaa'
   },
   item: {
-    marginBottom: 20
+    marginBottom: 10,
+    backgroundColor: '#202020',
+    borderRadius: 6,
   },
   nome:{
     fontSize: 18,
-    color: '#ff0000'
+    color: '#fff',
+    padding: 4,
+    marginLeft: 4
   },
   actions:{
     flexDirection: 'row',
-    gap: 20
+    gap: 20,
+    padding: 4,
+    marginLeft: 4
   },
   link:{
-    color: '#0af'
+    color: '#0af',
+    borderRadius: 6,
+    borderWidth: 1,
+    borderColor: "#0af",
+    paddingVertical: 4,
+    paddingHorizontal: 8,
   },
   excluir:{
-    color: '#f00'
+    color: '#f00',
+    borderWidth: 1,
+    borderColor: "#f00",
+    paddingVertical: 4,
+    paddingHorizontal: 8,
   }
 });

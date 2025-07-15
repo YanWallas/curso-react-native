@@ -8,17 +8,20 @@ export default function Header(){
   const route = useRoute();
 
   return (
-    <View style={StyleSheet.header}>
+    <View style={styles.header}>
       <TouchableOpacity onPress={() => navigation.navigate('Home')}>
         <Text style={styles.logo}>Save Flix</Text>
       </TouchableOpacity>
 
-      {route.name !== 'Favoritos' && (
+      {route.name === 'Favoritos' ? (
+        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+          <Text style={styles.favoritos}>Voltar ao Catálogo</Text>
+        </TouchableOpacity>
+      ) : (
         <TouchableOpacity onPress={() => navigation.navigate('Favoritos')}>
           <Text style={styles.favoritos}>Meus Filmes</Text>
         </TouchableOpacity>
       )}
-      
     </View>
   );
 }
