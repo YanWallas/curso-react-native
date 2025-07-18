@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator, TextInput, TouchableOpacity } from 'react-native';
 
 import { PickerItem } from './src/Picker';
 import { api } from './src/services/api';
 
 export default function App() {
-  const [moedas, setMoedas] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [moedas, setMoedas] = useState([]);
+
+  const [moedaSelecionada, setMoedaSelecionada] = useState(null);
 
   useEffect(()=>{
     async function loadMoedas(){
@@ -17,11 +19,12 @@ export default function App() {
         arrayMoedas.push({
           key: key,
           label: key,
-          value: key
+          value: key,
         })
       })
 
       setMoedas(arrayMoedas);
+      setMoedaSelecionada(arrayMoedas[0].key)
       setLoading(false);
     }
 
@@ -34,19 +37,39 @@ export default function App() {
         <ActivityIndicator color='#FFF' size='large' />
       </View>
     )
+  }else{
+    return (
+      <View style={styles.container}>
+        <View style={styles.areaMoeda}>
+          <Text style={styles.titulo}>Selecione sua moeda</Text>
+
+          <PickerItem
+            moedas={moedas}
+            moedaSelecionada={moedaSelecionada}
+            onChange={(moeda) => setMoedaSelecionada(moeda)}
+          />
+
+        </View>
+
+        <View style={styles.areaValor}>
+          <Text style={styles.titulo}>Digite um valor para converter em (R$)</Text>
+          <TextInput
+            placeholder="EX: 1.50"
+            style={styles.input}
+            keyboardType='numeric'
+          />
+        </View>
+
+        <TouchableOpacity style={styles.btnArea}>
+          <Text style={styles.btnText}>Converter</Text>
+        </TouchableOpacity>
+
+        <StatusBar style="auto" />
+      </View>
+    );
   }
 
-  return (
-    <View style={styles.container}>
-      <View style={styles.areaMoeda}>
-        <Text style={styles.titulo}>Selecione sua moeda</Text>
-
-        <PickerItem/>
-
-      </View>
-      <StatusBar style="auto" />
-    </View>
-  );
+  
 }
 
 const styles = StyleSheet.create({
@@ -61,7 +84,8 @@ const styles = StyleSheet.create({
     width: '90%',
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
-    padding: 8
+    padding: 8,
+    marginBottom: 2
   },
   titulo:{
     fontSize: 16,
@@ -69,5 +93,32 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     paddingLeft: 5,
     paddingTop: 5
+  },
+  areaValor:{
+    width: '90%',
+    backgroundColor: "#f9f9f9",
+    paddingTop: 8,
+    paddingBottom: 8,
+  },
+  input: {
+    width: '100%',
+    padding: 8,
+    fontSize: 18,
+    color: "#000"
+  },
+  btnArea:{
+    width: '90%',
+    height: 45,
+    backgroundColor: "#fb4b57",
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderBottomLeftRadius: 8,
+    borderBottomRightRadius: 8,
+    marginTop: 2
+  },
+  btnText:{
+    color: "#000",
+    fontWeight: 'bold',
+    fontSize: 16
   }
 });
