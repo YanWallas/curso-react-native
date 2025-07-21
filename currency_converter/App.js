@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ActivityIndicator, TextInput, TouchableOpacity, Keyboard } from 'react-native';
 
 import { PickerItem } from './src/Picker';
@@ -36,16 +35,30 @@ export default function App() {
   },[])
 
   async function converter(){
-    if(moedaBValor === 0 || moedaBValor === '' || moedaSelecionada === null){
+    const valorNumerico = parseFloat(moedaBValor);
+
+    if(!moedaSelecionada || isNaN(valorNumerico)){
       return;
     }
 
     const response = await api.get(`/all/${moedaSelecionada}-BRL`);
-    let resultado = (response.data[moedaSelecionada].ask * parseFloat(moedaBValor) )
+    let cotacao = parseFloat(response.data[moedaSelecionada]?.ask);
+    let cotacaoArredondada = parseFloat(cotacao.toFixed(2));
 
-    setValorConvertido(`${resultado.toLocaleString("pt-BR", { style: "currency", currency: "BRL"})}`)
-    setValorMoeda(moedaBValor);
+    if(isNaN(cotacao)){
+      console.warn("cotação invalida");
+      return;
+    }
+
+    const resultado = cotacaoArredondada * valorNumerico;
+
+    setValorConvertido(`${resultado.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}`)
+    setValorMoeda(valorNumerico);
     Keyboard.dismiss();
+    console.log("Cotação:", cotacao);
+    console.log("Valor digitado:", valorNumerico);
+    console.log("Resultado:", resultado);
+
   }
 
   if(loading){
@@ -90,8 +103,6 @@ export default function App() {
             <Text style={styles.valorConvertido}>{valorConvertido}</Text>
           </View>
         )}
-
-        <StatusBar style="light" backgroundColor='#121212'/>
       </View>
     );
   }
