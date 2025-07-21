@@ -77,9 +77,18 @@ const styles = StyleSheet.create({
     color: "#FFF"
   },
   resultado:{
-    flex: 1,
+    flex: 0.5,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: '#FFF',
+    padding: 20,
+    borderRadius: 10,
+    margin: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   itemText:{
     fontSize: 22
