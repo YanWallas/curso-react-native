@@ -37,15 +37,28 @@ export default function App() {
         </TouchableOpacity>
 
         <TouchableOpacity 
-          style={[styles.btn, { backgroundColor: '#ff0000'}, counter === 0 && { backgroundColor: "#DDD"}]} 
+          style={[styles.btn, { backgroundColor: '#961a1aff'}, counter === 0 && { backgroundColor: "#DDD"}]} 
           onPress={() => changeCounter(counter - 1)}
+          disabled={counter === 0}
         >
           <Text style={styles.btnText}>Remover</Text>
         </TouchableOpacity>
       </View>
 
-      <TouchableOpacity style={styles.btnZerar}>
-        <Text style={styles.textZerar}>ZERAR CONTAGEM</Text>
+      <TouchableOpacity 
+        style={[styles.btnZerar, counter === 0 && { backgroundColor: "#DDD", borderColor: "#DDD"}]}
+        disabled={counter === 0}
+        onPress={() => setCounter(0)}
+      >
+        <Text style={[styles.textZerar, counter === 0 && { color: "#FFF"}]}>ZERAR CONTAGEM</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity 
+        style={[styles.btnMaximo, counter >= limit && { backgroundColor: "#DDD", borderColor: "#DDD"}]}
+        disabled={counter >= limit}
+        onPress={() => setCounter(10)}
+      >
+        <Text style={[styles.textMaximo, counter >= limit && { color: "#FFF"}]}>LOTAÇÃO MAXIMA</Text>
       </TouchableOpacity>
 
       <StatusBar style="auto" />
@@ -77,7 +90,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#f8b135',
     padding: 4,
     borderRadius: 4,
-    marginBottom: 20
+    marginBottom: 20,
+    fontWeight: 'bold'
   },
   areBtn:{
     flexDirection: 'row',
@@ -90,17 +104,31 @@ const styles = StyleSheet.create({
   },
   btnText:{
     color: "#FFF",
-    fontSize: 16
+    fontSize: 16,
+    fontWeight: 'bold'
   },
   btnZerar:{
     marginTop: 30,
-    borderWidth: 1,
-    borderColor: '#7a0707ff',
+    borderWidth: 2,
+    borderColor: '#ff0000',
     padding: 8,
     borderRadius: 8
   },
   textZerar:{
-    color: '#7a0707ff',
-    fontSize: 18
+    color: '#ff0000',
+    fontSize: 18,
+    fontWeight: 'bold'
+  },
+    btnMaximo:{
+    marginTop: 10,
+    borderWidth: 2,
+    borderColor: '#f8b135',
+    padding: 8,
+    borderRadius: 8
+  },
+  textMaximo:{
+    color: '#f8b135',
+    fontSize: 18,
+    fontWeight: 'bold'
   }
 });
