@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, Pressable } from 'react-native';
 
 export default function App() {
   const [counter, setCounter] = useState(0);
   const [limit, setLimit] = useState(10);
 
  function changeCounter(counter){
-  if(counter <= 0) return;
+  if(counter < 0) return;
 
   if(counter >= limit){
     setCounter(10);
@@ -23,17 +23,30 @@ export default function App() {
       <Text style={styles.text}>Pessoas no restaurante:</Text>
       <Text style={styles.counterText}>{counter}</Text>
 
-      <Text style={styles.warning}>Restaurante está no seu limite de pessoas.</Text>
+      {counter >= limit && (
+        <Text style={styles.warning}>Restaurante está no seu limite de pessoas.</Text>
+      )}
 
       <View style={styles.areBtn}> 
-        <TouchableOpacity style={[styles.btn, { backgroundColor: '#007bff'}]} onPress={() => changeCounter(counter + 1)}>
+        <TouchableOpacity 
+          style={[styles.btn, { backgroundColor: '#007bff'}, counter >= limit && { backgroundColor: "#DDD"}]} 
+          onPress={() => changeCounter(counter + 1)}
+          disabled={counter >= limit}
+        >
           <Text style={styles.btnText}>Adicionar</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={[styles.btn, { backgroundColor: '#ff0000'}]} onPress={() => changeCounter(counter - 1)}>
+        <TouchableOpacity 
+          style={[styles.btn, { backgroundColor: '#ff0000'}, counter === 0 && { backgroundColor: "#DDD"}]} 
+          onPress={() => changeCounter(counter - 1)}
+        >
           <Text style={styles.btnText}>Remover</Text>
         </TouchableOpacity>
       </View>
+
+      <TouchableOpacity style={styles.btnZerar}>
+        <Text style={styles.textZerar}>ZERAR CONTAGEM</Text>
+      </TouchableOpacity>
 
       <StatusBar style="auto" />
     </View>
@@ -78,5 +91,16 @@ const styles = StyleSheet.create({
   btnText:{
     color: "#FFF",
     fontSize: 16
+  },
+  btnZerar:{
+    marginTop: 30,
+    borderWidth: 1,
+    borderColor: '#7a0707ff',
+    padding: 8,
+    borderRadius: 8
+  },
+  textZerar:{
+    color: '#7a0707ff',
+    fontSize: 18
   }
 });
