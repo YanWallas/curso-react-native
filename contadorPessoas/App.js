@@ -20,6 +20,8 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.titulo}>CONTAGEM DE PESSOAS DENTRO DO RESTAURANTE</Text>
+
       <Text style={styles.text}>Pessoas no restaurante:</Text>
       <Text style={styles.counterText}>{counter}</Text>
 
@@ -72,6 +74,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  titulo:{
+    fontWeight: 'bold',
+    marginBottom: 15
   },
   text:{
     fontSize: 20,
