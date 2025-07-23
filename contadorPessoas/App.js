@@ -1,20 +1,36 @@
+import { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function App() {
+  const [counter, setCounter] = useState(0);
+  const [limit, setLimit] = useState(10);
+
+ function changeCounter(counter){
+  if(counter <= 0) return;
+
+  if(counter >= limit){
+    setCounter(10);
+    return;
+  }
+
+  setCounter(counter);
+
+ }
+
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Pessoas no restaurante:</Text>
-      <Text style={styles.counterText}>10</Text>
+      <Text style={styles.counterText}>{counter}</Text>
 
       <Text style={styles.warning}>Restaurante está no seu limite de pessoas.</Text>
 
       <View style={styles.areBtn}> 
-        <TouchableOpacity style={[styles.btn, { backgroundColor: '#007bff'}]}>
+        <TouchableOpacity style={[styles.btn, { backgroundColor: '#007bff'}]} onPress={() => changeCounter(counter + 1)}>
           <Text style={styles.btnText}>Adicionar</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={[styles.btn, { backgroundColor: '#ff0000'}]}>
+        <TouchableOpacity style={[styles.btn, { backgroundColor: '#ff0000'}]} onPress={() => changeCounter(counter - 1)}>
           <Text style={styles.btnText}>Remover</Text>
         </TouchableOpacity>
       </View>
