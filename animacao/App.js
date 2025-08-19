@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, Animated } from 'react-native';
 export default function App() {
   const larAnimada = useRef(new Animated.Value(150)).current;
   const altAnimada = useRef(new Animated.Value(50)).current;
-  const opacidadeAnimada = useRef(new Animated.Value(1)).current;
+  const opacidadeAnimada = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     // ANIMAÇÃO SEQUENCIAL (FAZ UMA, DEPOIS A OUTRA)
@@ -25,16 +25,47 @@ export default function App() {
     //     useNativeDriver: false
     //   })
     // ]).start();
+    //********************************************************** */
 
     // ANIMAÇÃO PARALELA(TODO AO MESMO TEMPO)
-    Animated.parallel([// 
-      Animated.timing(larAnimada, {
-        toValue: 300,
+    // Animated.parallel([// 
+    //   Animated.timing(larAnimada, {
+    //     toValue: 300,
+    //     duration: 2000,
+    //     useNativeDriver: false
+    //   }),
+    //   Animated.timing(altAnimada, {
+    //     toValue: 300,
+    //     duration: 2000,
+    //     useNativeDriver: false
+    //   })
+    // ]).start();
+    //********************************************************** */
+
+    // ANIMAÇÃO SEQUENCIAL E PARALELA JUNTAS:
+    // COMEÇA COM A SEQUENCIA
+    Animated.sequence([
+      Animated.timing(opacidadeAnimada, {
+        toValue: 1,
         duration: 2000,
         useNativeDriver: false
       }),
-      Animated.timing(altAnimada, {
-        toValue: 300,
+      //DEPOIS CHAMA O BLOCO DE PARALELA
+      Animated.parallel([
+        Animated.timing(larAnimada, {
+          toValue: 300,
+          duration: 2000,
+          useNativeDriver: false
+        }),
+        Animated.timing(altAnimada, {
+          toValue: 300,
+          duration: 2000,
+          useNativeDriver: false
+        }),
+      ]),
+      // CONTINUA A SEQUENCIA FINALIZANDO
+      Animated.timing(opacidadeAnimada, {
+        toValue: 0,
         duration: 2000,
         useNativeDriver: false
       })
