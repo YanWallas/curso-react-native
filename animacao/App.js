@@ -42,34 +42,44 @@ export default function App() {
     // ]).start();
     //********************************************************** */
 
+    // ANIMAÇÃO EM LOOP
     // ANIMAÇÃO SEQUENCIAL E PARALELA JUNTAS:
     // COMEÇA COM A SEQUENCIA
-    Animated.sequence([
-      Animated.timing(opacidadeAnimada, {
-        toValue: 1,
-        duration: 2000,
-        useNativeDriver: false
-      }),
-      //DEPOIS CHAMA O BLOCO DE PARALELA
-      Animated.parallel([
-        Animated.timing(larAnimada, {
-          toValue: 300,
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(opacidadeAnimada, {
+          toValue: 1,
           duration: 2000,
           useNativeDriver: false
         }),
-        Animated.timing(altAnimada, {
-          toValue: 300,
-          duration: 2000,
-          useNativeDriver: false
-        }),
-      ]),
-      // CONTINUA A SEQUENCIA FINALIZANDO
-      Animated.timing(opacidadeAnimada, {
-        toValue: 0,
-        duration: 2000,
-        useNativeDriver: false
-      })
-    ]).start();
+        //DEPOIS CHAMA O BLOCO DE PARALELA
+        Animated.parallel([
+          Animated.timing(larAnimada, {
+            toValue: 300,
+            duration: 2000,
+            useNativeDriver: false
+          }),
+          Animated.timing(altAnimada, {
+            toValue: 300,
+            duration: 2000,
+            useNativeDriver: false
+          }),
+        ]),
+        // CONTINUA A PARALELA, VOLTANDO PARA O ORIGINAL, UTILIZANDO O LOOṔ
+        Animated.parallel([
+          Animated.timing(larAnimada, {
+            toValue: 150,
+            duration: 2000,
+            useNativeDriver: false
+          }),
+          Animated.timing(altAnimada, {
+            toValue: 150,
+            duration: 2000,
+            useNativeDriver: false
+          }),
+        ])
+      ])
+    ).start();
   }, []);
 
   return (
@@ -81,7 +91,8 @@ export default function App() {
           height: altAnimada,
           backgroundColor: '#4169e1',
           justifyContent: 'center',
-          opacity: opacidadeAnimada
+          opacity: opacidadeAnimada,
+          borderRadius: 50
         }}
       >
         <Text style={{ textAlign: 'center', fontSize: 22, color: '#FFF'}}>Carregando...</Text>
