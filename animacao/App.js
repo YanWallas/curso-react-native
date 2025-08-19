@@ -7,7 +7,27 @@ export default function App() {
   const opacidadeAnimada = useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
-    Animated.sequence([// Animação em sequencia
+    // ANIMAÇÃO SEQUENCIAL (FAZ UMA, DEPOIS A OUTRA)
+    // Animated.sequence([
+    //   Animated.timing(larAnimada, {
+    //     toValue: 300,
+    //     duration: 2000,
+    //     useNativeDriver: false
+    //   }),
+    //   Animated.timing(altAnimada, {
+    //     toValue: 300,
+    //     duration: 2000,
+    //     useNativeDriver: false
+    //   }),
+    //   Animated.timing(opacidadeAnimada,{
+    //     toValue: 0,
+    //     duration: 1000,
+    //     useNativeDriver: false
+    //   })
+    // ]).start();
+
+    // ANIMAÇÃO PARALELA(TODO AO MESMO TEMPO)
+    Animated.parallel([// 
       Animated.timing(larAnimada, {
         toValue: 300,
         duration: 2000,
@@ -16,11 +36,6 @@ export default function App() {
       Animated.timing(altAnimada, {
         toValue: 300,
         duration: 2000,
-        useNativeDriver: false
-      }),
-      Animated.timing(opacidadeAnimada,{
-        toValue: 0,
-        duration: 1000,
         useNativeDriver: false
       })
     ]).start();
