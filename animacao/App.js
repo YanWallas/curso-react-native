@@ -81,11 +81,19 @@ export default function App() {
     //   ])
     // ).start();
 
-    Animated.timing(larAnimada, {
-      toValue: 100,
-      duration: 4000,
-      useNativeDriver: false
-    }).start();
+    Animated.sequence([
+      Animated.timing(larAnimada, {
+        toValue: 100,
+        duration: 4000,
+        useNativeDriver: false
+      }),
+      Animated.timing(altAnimada, {
+        toValue: 100,
+        duration: 4000,
+        useNativeDriver: false
+      })
+    ]).start();
+    
   }, []);
 
   //usando interpolate para usar porcentagem de tela na largura.
@@ -94,17 +102,22 @@ export default function App() {
     outputRange: ['0%', '100%'] //Vai sair 0% até 100%
   })
 
+  let porcentagemAltura = altAnimada.interpolate({
+    inputRange: [50, 100],
+    outputRange: ['5%', '100%']
+  })
+
   return (
     <View style={styles.container}>
 
       <Animated.View
         style={{
           width: porcentagemLargura,
-          height: altAnimada,
+          height: porcentagemAltura,
           backgroundColor: '#4169e1',
           justifyContent: 'center',
           //opacity: opacidadeAnimada,
-          borderRadius: 50
+          //borderRadius: 50
         }}
       >
         {/* <Text style={{ textAlign: 'center', fontSize: 22, color: '#FFF'}}>Carregando...</Text> */}
