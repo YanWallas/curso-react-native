@@ -92,7 +92,11 @@ export default function App() {
         duration: 4000,
         useNativeDriver: false
       })
-    ]).start();
+    ]).start(({ finished }) => {
+      // só é chamada quando finalizar a animação.
+      alert('ANIMAÇÃO FINALIZADAS!');
+      console.log(finished);
+    });
     
   }, []);
 
