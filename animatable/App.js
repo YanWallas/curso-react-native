@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 import * as Animatable from 'react-native-animatable';
@@ -6,6 +6,12 @@ import * as Animatable from 'react-native-animatable';
 const ButtonAnimated = Animatable.createAnimatableComponent(TouchableOpacity);
 
 export default function App() {
+  const buttonRef = useRef(null);
+
+  function handleClick(){
+    buttonRef.current.shake();
+  }
+
   return (
     <View style={styles.container}>
       <Animatable.Text 
@@ -17,7 +23,12 @@ export default function App() {
         Sujeito Programador!
       </Animatable.Text>
 
-      <ButtonAnimated style={styles.button} animation="pulse">
+      <ButtonAnimated 
+        style={styles.button} 
+        animation="pulse" 
+        ref={buttonRef}
+        onPress={handleClick}
+      >
         <Text style={{ color: '#FFF' }}>Animar</Text>
       </ButtonAnimated>
     </View>
