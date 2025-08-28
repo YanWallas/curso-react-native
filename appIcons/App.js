@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import Feather from '@expo/vector-icons/Feather';
 
@@ -10,6 +10,14 @@ export default function App() {
         size={45}
         color="#FF0000"
       />
+
+      <TouchableOpacity>
+        <Feather
+          name='video'
+          size={45}
+          color="#000"q
+        />
+      </TouchableOpacity>
     </View>
   );
 }
